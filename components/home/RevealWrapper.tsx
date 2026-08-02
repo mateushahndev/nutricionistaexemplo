@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 interface RevealWrapperProps {
   children: ReactNode
@@ -11,7 +11,18 @@ interface RevealWrapperProps {
 
 export default function RevealWrapper({ children, delay = 0, className = '' }: RevealWrapperProps) {
   const searchParams = useSearchParams()
-  const isScreenshot = searchParams.get('screenshot') === 'true'
+  const isScreenshot = searchParams?.get('screenshot') === 'true'
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    if (isScreenshot) {
+      setIsVisible(true)
+      return
+    }
+
+    const el = document.current
+    // Não precisa de observer se for screenshot
+  }, [isScreenshot])
 
   if (isScreenshot) {
     return <div className={className}>{children}</div>
