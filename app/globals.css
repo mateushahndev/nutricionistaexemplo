@@ -2,32 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 40 30% 93%;
+    --foreground: 100 10% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 100 10% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 100 10% 14%;
+    --primary: 140 35% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 10 78% 79%;
+    --secondary-foreground: 100 10% 14%;
+    --muted: 40 15% 85%;
+    --muted-foreground: 100 5% 45%;
+    --accent: 245 65% 66%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 20% 80%;
+    --input: 40 20% 80%;
+    --ring: 140 35% 33%;
+    --radius: 32px;
+  }
+
+  .dark {
+    --background: 100 10% 14%;
+    --foreground: 40 30% 93%;
+    --card: 100 10% 16%;
+    --card-foreground: 40 30% 93%;
+    --popover: 100 10% 16%;
+    --popover-foreground: 40 30% 93%;
+    --primary: 140 35% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 10 78% 79%;
+    --secondary-foreground: 100 10% 14%;
+    --muted: 100 10% 20%;
+    --muted-foreground: 40 10% 60%;
+    --accent: 245 65% 66%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 100 10% 20%;
+    --input: 100 10% 20%;
+    --ring: 140 35% 33%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f0e6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f6b4f;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1b3327;
+}
+
+/* Utility for accent text */
+.accent {
+  @apply font-serif italic text-sage;
 }
