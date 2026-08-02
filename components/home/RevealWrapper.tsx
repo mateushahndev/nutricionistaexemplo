@@ -1,36 +1,24 @@
 'use client'
 
-import { ReactNode, useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { ReactNode, useEffect, useState } from 'react'
 
 interface RevealWrapperProps {
   children: ReactNode
   delay?: number
   className?: string
-  isScreenshot?: boolean
 }
 
-export default function RevealWrapper({ children, delay = 0, className = '', isScreenshot = false }: RevealWrapperProps) {
-  const ref = useRef<HTMLDivElement>(null)
+export default function RevealWrapper({ children, delay = 0, className = '' }: RevealWrapperProps) {
+  const searchParams = useSearchParams()
+  const isScreenshot = searchParams?.get('screenshot') === 'true'
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    if (isScreenshot) return
-
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.opacity = '1'
-          el.style.transform = 'translateY(0)'
-          observer.unobserve(el)
-        }
-      },
-      { threshold: 0.15 }
-    )
-    observer.observe(el)
-
-    return () => observer.disconnect()
+    if (isScreenshot) {
+      setIsVisible(true)
+      return
+    }
   }, [isScreenshot])
 
   if (isScreenshot) {
@@ -39,14 +27,27 @@ export default function RevealWrapper({ children, delay = 0, className = '', isS
 
   return (
     <div 
-      ref={ref}
-      className={className}
+      className={`${className}`}
       style={{ 
         opacity: 0,
         transform: 'translateY(28px)',
         transition: `opacity 0.8s ease, transform 0.8s ease`,
         transitionDelay: `${delay}s`,
         willChange: 'opacity, transform'
+      }}
+      ref={(el) => {
+        if (!el) return
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              el.style.opacity = '1'
+              el.style.transform = 'translateY(0)'
+              observer.unobserve(el)
+            }
+          },
+          { threshold: 0.15 }
+        )
+        observer.observe(el)
       }}
     >
       {children}
