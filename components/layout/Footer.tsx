@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { Logo } from '@/components/Icons'
 
@@ -19,7 +17,6 @@ export default function Footer() {
           <div>
             <h4 className="text-white/60 text-sm uppercase tracking-wider font-semibold mb-4">Suporte</h4>
             <ul className="space-y-3">
-              <li><Link href="#" className="text-white/70 hover:text-white transition-colors text-sm">Imprensa e Mídia</Link></li>
               <li><Link href="/contato" className="text-white/70 hover:text-white transition-colors text-sm">Contato</Link></li>
               <li><Link href="/faq" className="text-white/70 hover:text-white transition-colors text-sm">FAQ</Link></li>
             </ul>

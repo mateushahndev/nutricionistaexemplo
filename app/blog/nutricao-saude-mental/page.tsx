@@ -6,12 +6,11 @@ export default function Post() {
   return (
     <div className="min-h-screen pt-24 pb-16 bg-cream">
       <div className="max-w-[820px] mx-auto px-4">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-green hover:text-sage transition-colors mb-8">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-ink-soft hover:text-sage transition-colors mb-8">
           <ArrowLeft className="w-4 h-4" />
           Voltar para o blog
         </Link>
         
-        <span className="text-xs font-bold tracking-widest text-sage uppercase">Saúde Mental</span>
         <h1 className="font-serif text-3xl md:text-4xl font-semibold text-green mt-2 mb-4">
           A ligação entre nutrição e saúde mental: como a comida afeta seu humor
         </h1>
